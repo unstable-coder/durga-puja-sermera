@@ -1,17 +1,17 @@
-(function($) {
+(function ($) {
   'use strict';
 
   /*-------------------------------------------------------------------------------
   Preloader
     -------------------------------------------------------------------------------*/
-  $(window).on('load', function() {
+  $(window).on('load', function () {
     $('.sigma_preloader').addClass('hidden');
   });
 
   /*-------------------------------------------------------------------------------
   Subheader Trigger
   -------------------------------------------------------------------------------*/
-  $(".subheader-toggler").on('click', function(e) {
+  $(".subheader-toggler").on('click', function (e) {
     e.preventDefault();
     $(".sigma_subheader-extras").toggleClass('open');
   });
@@ -19,7 +19,7 @@
   /*-------------------------------------------------------------------------------
   volunteers Socials Trigger
   -------------------------------------------------------------------------------*/
-  $("a.trigger-volunteers-socials").on('click', function(e) {
+  $("a.trigger-volunteers-socials").on('click', function (e) {
     e.preventDefault();
     $(this).closest('.sigma_sm').toggleClass('visible');
   });
@@ -27,7 +27,7 @@
   /*-------------------------------------------------------------------------------
   Cart Trigger
   -------------------------------------------------------------------------------*/
-  $(".sigma_cart-trigger").on('click', function(e) {
+  $(".sigma_cart-trigger").on('click', function (e) {
     e.preventDefault();
     $("body").toggleClass('cart-open');
   });
@@ -35,7 +35,7 @@
   /*-------------------------------------------------------------------------------
   Search Trigger
   -------------------------------------------------------------------------------*/
-  $(".sigma_search-trigger").on('click', function(e) {
+  $(".sigma_search-trigger").on('click', function (e) {
     e.preventDefault();
     $(".sigma_search-form-wrapper").toggleClass('open');
   });
@@ -43,11 +43,11 @@
   /*-------------------------------------------------------------------------------
   Aside Menu
   -------------------------------------------------------------------------------*/
-  $(".aside-trigger-right").on('click', function() {
+  $(".aside-trigger-right").on('click', function () {
     var $el = $(".sigma_aside-right-panel");
     $el.toggleClass('open');
     if ($el.hasClass('open')) {
-      setTimeout(function() {
+      setTimeout(function () {
         $el.find('.sidebar').fadeIn();
       }, 300);
     } else {
@@ -55,11 +55,11 @@
     }
   });
 
-  $(".aside-trigger-left").on('click', function() {
+  $(".aside-trigger-left").on('click', function () {
     $(".sigma_aside-left").toggleClass('open');
   });
 
-  $(".sigma_aside .menu-item-has-children > a").on('click', function(e) {
+  $(".sigma_aside .menu-item-has-children > a").on('click', function (e) {
     var submenu = $(this).next(".sub-menu");
     e.preventDefault();
 
@@ -84,16 +84,16 @@
   /*-------------------------------------------------------------------------------
   Tooltips
   -------------------------------------------------------------------------------*/
-  $(document).ready(function() {
-  $('[data-toggle="tooltip"]').tooltip();
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
   });
 
   /*-------------------------------------------------------------------------------
   Magnific Popup
   -------------------------------------------------------------------------------*/
-  $('.popup-youtube').magnificPopup({type: 'iframe'});
-  $('.popup-vimeo').magnificPopup({type: 'iframe'});
-  $('.popup-video').magnificPopup({type: 'iframe'});
+  $('.popup-youtube').magnificPopup({ type: 'iframe' });
+  $('.popup-vimeo').magnificPopup({ type: 'iframe' });
+  $('.popup-video').magnificPopup({ type: 'iframe' });
   $('.gallery-thumb').magnificPopup({
     type: 'image',
     gallery: {
@@ -133,7 +133,7 @@
     $(".minutes").html(minutes);
     $(".seconds").html(seconds);
   }
-  setInterval(function() {
+  setInterval(function () {
     makeTimer();
   }, 1000);
 
@@ -141,11 +141,11 @@
   Counter
   -------------------------------------------------------------------------------*/
 
-  $(".counter").each(function() {
+  $(".counter").each(function () {
     var $this = $(this);
-    $this.one('inview', function(event, isInView) {
+    $this.one('inview', function (event, isInView) {
       if (isInView) {
-        $this.countTo({speed: 2000});
+        $this.countTo({ speed: 2000 });
       }
     });
   });
@@ -153,7 +153,7 @@
   /*-------------------------------------------------------------------------------
   Checkout Notices
   -------------------------------------------------------------------------------*/
-  $(".sigma_notice a").on('click', function(e) {
+  $(".sigma_notice a").on('click', function (e) {
     e.preventDefault();
 
     $(this).closest('.sigma_notice').next().slideToggle();
@@ -162,24 +162,24 @@
   /*-------------------------------------------------------------------------------
   Progress bar on view
   -------------------------------------------------------------------------------*/
-  $(".sigma_progress-round").each(function() {
+  $(".sigma_progress-round").each(function () {
     var animateTo = $(this).data('to'),
       $this = $(this);
-    $this.one('inview', function(event, isInView) {
+    $this.one('inview', function (event, isInView) {
       if (isInView) {
-        $this.css({'stroke-dashoffset': animateTo});
+        $this.css({ 'stroke-dashoffset': animateTo });
       }
     });
   });
 
-  $(".sigma_progress").each(function() {
+  $(".sigma_progress").each(function () {
     var progressBar = $(this).find(".progress-bar");
     var progressCount = $(this).find(".sigma_progress-count");
-    $(progressBar).one('inview', function(event, isInView) {
+    $(progressBar).one('inview', function (event, isInView) {
       if (isInView) {
         $(progressBar).animate({
           width: $(progressBar).attr("aria-valuenow") + "%"
-        }, function() {
+        }, function () {
           $(progressCount).animate({
             left: $(progressBar).attr("aria-valuenow") + "%",
             opacity: 1
@@ -221,17 +221,24 @@
   /*-------------------------------------------------------------------------------
   Dots Slider
   -------------------------------------------------------------------------------*/
-  $(".basic-dot-slider").slick({slidesToShow: 1, slidesToScroll: 1, arrows: false, dots: true, autoplay: true});
+  $(".basic-dot-slider").slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, dots: true, autoplay: true });
 
   /*-------------------------------------------------------------------------------
-  Banner slider (Home v3)
-  -------------------------------------------------------------------------------*/
+   Banner slider (Home v1, v2, v3)
+ -------------------------------------------------------------------------------*/
   $(".banner-3 .sigma_banner-slider, .banner-1 .sigma_banner-slider, .banner-2 .sigma_banner-slider").slick({
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
-    dots: false,
-    autoplay: false,
+    arrows: true,            // hide arrows
+    dots: false,               // enable dots
+    autoplay: true,           // enable autoplay
+    autoplaySpeed: 5000,      // slide every 5s
+    speed: 1000,              // animation speed
+    fade: true,               // fade effect
+    cssEase: 'linear',        // smooth fade
+    pauseOnHover: false,      // don’t stop when hovering
+    pauseOnDotsHover: false,  // don’t stop when hovering dots
+    infinite: true,           // loop forever
     responsive: [
       {
         breakpoint: 991,
@@ -245,7 +252,7 @@
   /*-------------------------------------------------------------------------------
   Product details slider
   -------------------------------------------------------------------------------*/
-  $('.sigma_product-single-thumb .slider').slick({slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.sigma_product-single-thumb .slider-nav'});
+  $('.sigma_product-single-thumb .slider').slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.sigma_product-single-thumb .slider-nav' });
 
   $('.sigma_product-single-thumb .slider-nav').slick({
     slidesToShow: 3,
@@ -281,9 +288,9 @@
   /*-------------------------------------------------------------------------------
   Masonry
   -------------------------------------------------------------------------------*/
-  $('.masonry').imagesLoaded(function() {
+  $('.masonry').imagesLoaded(function () {
     var isotopeContainer = $('.masonry');
-    isotopeContainer.isotope({itemSelector: '.masonry-item'});
+    isotopeContainer.isotope({ itemSelector: '.masonry-item' });
   });
 
   /*------------------------------------------------------------------------------
@@ -293,7 +300,7 @@
   function doIsotope() {
     var $portfolioGrid = '';
 
-    $('.masonry').imagesLoaded(function() {
+    $('.masonry').imagesLoaded(function () {
       $portfolioGrid = $('.portfolio-filter').isotope({
         itemSelector: '.col-lg-4',
         percentPosition: true,
@@ -303,12 +310,12 @@
       });
     });
 
-    $('.filter-items').on('click', '.portfolio-trigger', function() {
+    $('.filter-items').on('click', '.portfolio-trigger', function () {
       var filterValue = $(this).attr('data-filter');
-      $portfolioGrid.isotope({filter: filterValue});
+      $portfolioGrid.isotope({ filter: filterValue });
     });
 
-    $('.portfolio-trigger').on('click', function(e) {
+    $('.portfolio-trigger').on('click', function (e) {
       $(this).closest('.filter-items').find('.active').removeClass('active');
       $(this).addClass('active');
       event.preventDefault();
@@ -320,7 +327,7 @@
   /*-------------------------------------------------------------------------------
   Add / Subtract Quantity
   -------------------------------------------------------------------------------*/
-  $(".qty span").on('click', function() {
+  $(".qty span").on('click', function () {
     var qty = $(this).closest('.qty').find('input');
     var qtyVal = parseInt(qty.val());
     if ($(this).hasClass('qty-add')) {
@@ -336,7 +343,7 @@
     Back to Top
     -----------------------------------*/
 
-    function stickBackToTop() {
+  function stickBackToTop() {
     if (window.pageYOffset > 400) {
       $('.sigma_top').addClass('active');
     } else {
@@ -345,7 +352,7 @@
   }
   stickBackToTop();
 
-  $('body').on('click', '.sigma_top', function() {
+  $('body').on('click', '.sigma_top', function () {
     $("html, body").animate({
       scrollTop: 0
     }, 600);
@@ -356,7 +363,7 @@
   new WOW().init();
 
   //On scroll events
-  $(window).on('scroll', function() {
+  $(window).on('scroll', function () {
 
     doSticky();
 
@@ -366,6 +373,6 @@
   });
 
   //On resize events
-  $(window).on('resize', function() {});
+  $(window).on('resize', function () { });
 
 })(jQuery);
